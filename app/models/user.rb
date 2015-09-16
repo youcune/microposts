@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   validates :description ,presence: true
   validates :location ,presence: true
   has_secure_password
+  has_many :microposts
 end
