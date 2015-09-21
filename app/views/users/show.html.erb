@@ -8,11 +8,24 @@
     </section>
   </aside>
   <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">
         <%= render @microposts %>
       </ol>
     <% end %>
+    <h2>followings</h2>
+     <ul>
+      <% @followings.each do |u| %>
+      <%= render 'user', user: u %>
+     <% end %>
+     </ul>
+    <h2>followings</h2>
+     <ul>
+      <% @followers.each do |u| %>
+      <%= render 'user', user: u %>
+     <% end %>
+    </ul> 
   </div>
 </div>
