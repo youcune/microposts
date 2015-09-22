@@ -9,4 +9,7 @@ class User < ActiveRecord::Base
   validates :location ,presence: true
   has_secure_password
   has_many :microposts
+  def feed_items
+    Micropost.where(user_id: following_user_ids + [self.id])
+  end
 end
