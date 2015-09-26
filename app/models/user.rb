@@ -8,9 +8,8 @@ class User < ActiveRecord::Base
   validates :description ,presence: true
   validates :location ,presence: true
   has_secure_password
-  has_many :microposts ,through: :favorites
-  belongs_to :favorite
-  
+  has_many :microposts
+
   def feed_items
     Micropost.where(user_id: following_user_ids + [self.id])
   end
@@ -34,21 +33,22 @@ class User < ActiveRecord::Base
   has_many :favorite_microposts, class_name: "Micropost",
                                  through: :favorites,
                                  foreign_key: "micropost_id",
+                                 source: 'micropost',
                                  dependent: :destroy
                               
   # ツイートをお気に入り追加
   def favorite(other_micropost)
-    favorite_microposts.create(micropost_id: other_micropost.id)
+    favorites.create(micropost_id: other_micropost.id)
   end  
   
   # ツイートをお気に入り解除
   def unfavorite(other_micropost)
-    favorite_microposts.find_by(micropost_id: other_micropost.id).destroy
+    favorites.find_by(micropost_id: other_micropost.id).destroy
   end
   
    # お気に入りしているかの判定
   def favorite?(other_micropost)
-    favorite_users.include?(other_micropost)
+    favorite_microposts.include?(other_micropost)
   end  
   
   # 他のユーザーをフォローする

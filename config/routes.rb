@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   #お気に入り課題追加
   resources :microposts do
     member do
-      get :favorites
-      get :unfavorites
+      post :favorites
+      post :unfavorites
     end
   end
 end
