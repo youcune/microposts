@@ -5,6 +5,8 @@ class UsersController < ApplicationController
     @microposts = @user.microposts
   end
   
+  
+  
   def new
     @user = User.new
   end
@@ -31,7 +33,23 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-
+  
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.following_users
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.follower_users
+  end
+  
+  def favorites
+      @user = User.find(params[:id])
+      @favorite_items = @user.favorite_microposts.includes(:user).order(created_at: :desc)
+  end
+  
+ 
   private
 
   def user_params

@@ -7,6 +7,24 @@ Rails.application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy, :edit, :update]
+  resources :relationships, only: [:create, :destroy]
+  resources :microposts
+  
+  resources :users do
+    member do
+     get 'followings'
+     get 'followers'
+     get 'favorites'
+    end 
+  end
+  
+  #お気に入り課題追加
+  resources :microposts do
+    member do
+      get :favorites
+      get :unfavorites
+    end
+  end
 end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

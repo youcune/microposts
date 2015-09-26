@@ -1,0 +1,7 @@
+<% if favorite %>
+     <%= link_to "unfav", unfavorites_micropost_path(favorite),
+         remote: true, class: "btn btn-warning btn-xs", id: "favorite-#{favorite}" %>
+   <% else %>
+     <%= link_to "fav", favorites_micropost_path(favorite),
+         remote: true, class: "btn btn-default btn-xs", id: "favorite-#{favorite}" %>
+<% end %>

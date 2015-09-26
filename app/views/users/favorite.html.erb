@@ -1,0 +1,19 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+       <li><%= link_to "followings", user_followings_path(@user) %></li>
+       <li>followers</li>
+    </section>
+  </aside>
+ <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
+     <ul>
+      <h3>This user's favorite</h3>
+      <%= render 'favoriteitems' %>
+     <% end %>
+  </ul>
+</div>
